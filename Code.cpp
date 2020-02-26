@@ -21,10 +21,10 @@ bool checkShip (int n){
 	}
 }
 
-int checkMap(char map[n][m]){
+int checkMap(char map){
 	
 	int count = 0;
-	
+	/*
 	for (int i = 0; i < n; i++){
 		for (int j = 0; j < m;  j++){
 			if(map[i][j] == 'X' || map[i][j] == 'x') {
@@ -32,7 +32,7 @@ int checkMap(char map[n][m]){
 			}
 		}
 	}
-	
+	*/
 	return count;
 }
 
@@ -57,7 +57,7 @@ int main(){
 			std::cin >> map[i]; 
 	}
 	
-	if(!(checkShip(checkMap(map, n, m)))){
+	if(!(checkShip(checkMap(map[0][0])))){
 		std::cout << "NO VALIDO" << std::endl;
 		return 0;
 	}
