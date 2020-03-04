@@ -1,7 +1,7 @@
 #include <iostream>
 
 int n, m;
-int sDSize = 0;
+int sDSize = 0, rCount = 0;
 int movx[4] = {0,1,0,-1};
 int movy[4] = {-1,0,1,0};
 int posx[4];
@@ -9,6 +9,41 @@ int posy[4];
 int rx;
 int ry;
 bool r = false;
+
+bool validChar(char a){
+	switch (a){
+		case '.':
+			return true;
+		break;
+		
+		case 'F':
+			return true;
+		break;
+		
+		case 'S':
+			return true;
+		break;
+		
+		case 'R':
+			return true;
+		break;
+		
+		case '@':
+			return true;
+		break;
+		
+		case 'X':
+			return true;
+		break;
+		
+		case '#':
+			return true;
+		break;
+	
+		default:
+			return false;
+	}
+}
 
 bool checkShip (int n){
 	switch (n){
@@ -45,6 +80,11 @@ bool checkMap(char **map){
 	bool gSpot = false;
 	for (int i = 0; i < n; i++){
 		for (int j = 0; j < m;  j++){
+			
+			if(!validChar(map[i][j])){
+				return false;
+			}
+			
 			if(map[i][j] == 'X' || map[i][j] == 'x') {
 				count++;
 				sDSize++;
@@ -61,9 +101,9 @@ bool checkMap(char **map){
 		}
 	}
 	
-	/*if(!r){
+	if(!r && rCount > 1){
 		return false;
-	}*/
+	}
 	
 	if(!checkShip(count)){
 		return false;
@@ -202,7 +242,12 @@ int main(){
 		map[i] = new char[m];
 	}
 	
-	if ( n > 8 || m < 4 ){
+	if ( n > 8 || n < 4 ){
+		std::cout << "NO VALIDO" << std::endl;
+		return 0;
+	}
+	
+	if ( m > 8 || m < 4 ){
 		std::cout << "NO VALIDO" << std::endl;
 		return 0;
 	}
